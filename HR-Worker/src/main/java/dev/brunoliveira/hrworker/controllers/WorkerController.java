@@ -3,11 +3,10 @@ package dev.brunoliveira.hrworker.controllers;
 import dev.brunoliveira.hrworker.dto.WorkerDto;
 import dev.brunoliveira.hrworker.service.WorkerService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -30,5 +29,31 @@ public class WorkerController {
     public ResponseEntity<WorkerDto> findById(@PathVariable Long id) {
         WorkerDto worker = workerService.findById(id);
         return ResponseEntity.ok().body(worker);
+    }
+
+    @PostMapping
+    public ResponseEntity<WorkerDto> insert(@RequestBody WorkerDto worker){
+        worker = workerService.insert(worker);
+
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(worker.getId())
+                .toUri();
+
+        return ResponseEntity.created(uri).body(worker);
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<WorkerDto> update(@PathVariable Long id, @RequestBody WorkerDto worker) {
+        worker = workerService.update(worker, id);
+
+        return ResponseEntity.ok().body(worker);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        workerService.delete(id);
+
+        return ResponseEntity.noContent().build();
     }
 }
