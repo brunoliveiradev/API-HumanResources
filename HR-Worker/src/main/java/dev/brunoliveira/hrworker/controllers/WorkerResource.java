@@ -2,6 +2,9 @@ package dev.brunoliveira.hrworker.controllers;
 
 import dev.brunoliveira.hrworker.dto.WorkerDto;
 import dev.brunoliveira.hrworker.service.WorkerService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -13,10 +16,15 @@ import java.util.List;
 @RequestMapping(value = "/workers")
 public class WorkerResource {
 
+    private static final Logger logger = LoggerFactory.getLogger(WorkerResource.class);
+
+    private final Environment env;
+
     private final WorkerService workerService;
 
-    public WorkerResource(WorkerService workerService) {
+    public WorkerResource(WorkerService workerService, Environment env) {
         this.workerService = workerService;
+        this.env = env;
     }
 
     @GetMapping
@@ -27,6 +35,9 @@ public class WorkerResource {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<WorkerDto> findById(@PathVariable Long id) {
+
+        logger.info("PORT = " + env.getProperty("local.server.port"));
+
         WorkerDto worker = workerService.findById(id);
         return ResponseEntity.ok().body(worker);
     }
