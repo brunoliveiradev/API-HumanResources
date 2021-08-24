@@ -11,11 +11,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/workers")
-public class WorkerController {
+public class WorkerResource {
 
     private final WorkerService workerService;
 
-    public WorkerController(WorkerService workerService) {
+    public WorkerResource(WorkerService workerService) {
         this.workerService = workerService;
     }
 

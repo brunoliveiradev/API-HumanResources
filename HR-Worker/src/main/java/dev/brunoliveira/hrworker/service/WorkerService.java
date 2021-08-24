@@ -1,7 +1,7 @@
 package dev.brunoliveira.hrworker.service;
 
 import dev.brunoliveira.hrworker.dto.WorkerDto;
-import dev.brunoliveira.hrworker.models.Worker;
+import dev.brunoliveira.hrworker.entities.Worker;
 import dev.brunoliveira.hrworker.repositories.WorkerRepository;
 import dev.brunoliveira.hrworker.service.exceptions.ResourceNotFoundException;
 import org.springframework.dao.EmptyResultDataAccessException;

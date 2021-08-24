@@ -1,6 +1,6 @@
 package dev.brunoliveira.hrworker.dto;
 
-import dev.brunoliveira.hrworker.models.Worker;
+import dev.brunoliveira.hrworker.entities.Worker;
 
 import java.io.Serializable;
 

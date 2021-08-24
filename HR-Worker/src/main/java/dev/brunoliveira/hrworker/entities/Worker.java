@@ -1,4 +1,4 @@
-package dev.brunoliveira.hrworker.models;
+package dev.brunoliveira.hrworker.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
