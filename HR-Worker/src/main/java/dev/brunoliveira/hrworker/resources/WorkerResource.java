@@ -1,9 +1,10 @@
-package dev.brunoliveira.hrworker.controllers;
+package dev.brunoliveira.hrworker.resources;
 
 import dev.brunoliveira.hrworker.dto.WorkerDto;
 import dev.brunoliveira.hrworker.service.WorkerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,9 @@ public class WorkerResource {
 
     private static final Logger logger = LoggerFactory.getLogger(WorkerResource.class);
 
+    @Value("${test.config}")
+    private String testConfig;
+
     private final Environment env;
 
     private final WorkerService workerService;
@@ -25,6 +29,12 @@ public class WorkerResource {
     public WorkerResource(WorkerService workerService, Environment env) {
         this.workerService = workerService;
         this.env = env;
+    }
+
+    @GetMapping(value = "/configs")
+    public ResponseEntity<Void> getConfig() {
+        logger.info("CONFIG = {}", testConfig);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping
@@ -36,7 +46,7 @@ public class WorkerResource {
     @GetMapping(value = "/{id}")
     public ResponseEntity<WorkerDto> findById(@PathVariable Long id) {
 
-        logger.info("PORT = " + env.getProperty("local.server.port"));
+        logger.info("PORT = {}", env.getProperty("local.server.port"));
 
         WorkerDto worker = workerService.findById(id);
         return ResponseEntity.ok().body(worker);
