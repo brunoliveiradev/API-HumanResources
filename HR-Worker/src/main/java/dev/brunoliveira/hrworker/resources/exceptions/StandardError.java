@@ -1,4 +1,4 @@
-package dev.brunoliveira.hrworker.controllers.exceptions;
+package dev.brunoliveira.hrworker.resources.exceptions;
 
 import java.io.Serializable;
 import java.time.Instant;

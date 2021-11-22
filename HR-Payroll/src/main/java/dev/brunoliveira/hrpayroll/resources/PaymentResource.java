@@ -1,4 +1,4 @@
-package dev.brunoliveira.hrpayroll.controllers;
+package dev.brunoliveira.hrpayroll.resources;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import dev.brunoliveira.hrpayroll.entities.Payment;

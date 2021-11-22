@@ -1,4 +1,4 @@
-package dev.brunoliveira.hrworker.controllers.exceptions;
+package dev.brunoliveira.hrworker.resources.exceptions;
 
 import dev.brunoliveira.hrworker.service.exceptions.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
